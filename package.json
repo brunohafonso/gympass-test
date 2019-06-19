@@ -1,0 +1,16 @@
+{
+  "name": "desafio-gympass",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "lint:fix": "eslint \"**/*.js\" -o ./lint.html -f html --fix",
+    "jsdoc": "jsdoc -r ./src"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "jsdoc": "^3.6.2"
+  }
+}
