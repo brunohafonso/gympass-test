@@ -3,7 +3,7 @@ const fs = require('fs');
 const { extractDataFromLogFile } = require('./lib/extractLog')();
 const { consolidateRaceData } = require('./lib/extractInformation')();
 
-const logData = extractDataFromLogFile(`${__dirname}/resources/corrida.log`);
+const logData = extractDataFromLogFile(`${__dirname}/resources/corrida.txt`);
 
 const raceData = consolidateRaceData(logData);
 
