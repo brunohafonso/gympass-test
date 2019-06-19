@@ -106,9 +106,12 @@ module.exports = () => {
         throw new Error(`the file ${basename(logFilePath)} does not exist`);
       }
 
+      console.info('reading log file');
+
       const logData = readFileSync(resolve(logFilePath)).toString();
       const raceData = [];
 
+      console.info('exteacting data from log file');
       logData.split('\n').forEach((line, index) => {
         if (index !== 0) {
           const { pilotId, pilotName } = extractPilotInformation(line);

@@ -30,7 +30,10 @@ module.exports = () => {
    * (classification, best lap of each pilot and etc).
    */
   function consolidateRaceData(dataList) {
+    console.info('getting all the pilots on race');
     const pilotDataList = joinLapAndPilotInformation(dataList);
+
+    console.info('organizing the race data');
     return pilotDataList.map(pilot => ({
       ...pilot,
       pilotId: pilot.pilotId,
