@@ -6,6 +6,10 @@
     },
     "extends": "airbnb-base",
     "globals": {
+        "XMLHttpRequest": true,
+        "FormData": true,
+        "alert": true,
+        "document": true,
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
     },
@@ -13,6 +17,10 @@
         "ecmaVersion": 2018
     },
     "rules": {
+        "func-names": "off",
+        "new-cap": "off",
+        "no-plusplus": "off",
+        "no-alert": "off",
         "no-use-before-define": "off",
         "consistent-return": "off",
         "no-console": "off"

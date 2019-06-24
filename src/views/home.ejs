@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GymPass Race Test</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/styles/main.css">
+</head>
+<body>   
+    <video class="video-background" autoplay muted loop>
+        <source src="/assets/videos/raceCar2.mp4" type="video/mp4">
+    </video>
+    <div class="main-content">
+        <header class="header-container">
+            <img class="header-container__logo"  src="/assets/images/logo-gympass.png" alt="GymPass logo"/>
+            <h1 class="header-container__title">GymPass Race Test</h1>
+        </header>
+        <form class="main-content__form" action="/race"  method="post" enctype="multipart/form-data">
+            <input class="main-content__form__input"  type="file" name="file">
+            <label class="main-content__form__label" for="fileInput">
+                <i class="fas fa-cloud-download-alt fa-4x main-content__form__label__icon"></i>
+                <span class="main-content__form__label__content">
+                    Drag and Drop a file here
+                </span>
+            </label>
+            <br/>
+            <input class="main-content__form__submit"  type="submit" value="upload">
+        </form>
+        <footer class="footer-container">
+            <p class="footer-container__author">
+                Developed with <i class="far fa-heart footer-container__author__icon"></i> by Bruno Afonso.
+            </p>
+            <ul class="footer-container__social-list">
+                <li class="footer-container__social-list__item">
+                    <a class="footer-container__social-list__item__link" href="https://github.com/brunohafonso" target="_blank">
+                        <i class="fab fa-github-alt"></i>
+                    </a>
+                </li>
+                <li class="footer-container__social-list__item">
+                    <a class="footer-container__social-list__item__link" href="https://www.linkedin.com/in/brunohafonso/" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </li>    
+            </ul>
+        </footer>	
+    </div>
+    <script src="/scripts/fileUpload.js"></script>
+</body>
+</html>

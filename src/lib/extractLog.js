@@ -3,8 +3,6 @@
  * @module src/lib/extractLog
  * @author Bruno Afonso <brunohafonso@gmail.com>
  */
-const { readFileSync, existsSync } = require('fs');
-const { basename, resolve } = require('path');
 
 module.exports = () => {
   /**
@@ -17,7 +15,11 @@ module.exports = () => {
    */
   function extractDate(lineContent) {
     try {
-      return lineContent.match(/([0-9][0-9]):([0-9][0-9]):([0-9][0-9]).([0-9].?.?)/gi)[0].trim();
+      const date = lineContent.match(/([0-9][0-9]):([0-9][0-9]):([0-9][0-9]).([0-9].?.?)/gi)[0].trim();
+      if (!date) {
+        throw new Error('please check the log format');
+      }
+      return date;
     } catch (error) {
       throw new Error(`error to get date of the lap end - ${error.message}`);
     }
@@ -33,11 +35,14 @@ module.exports = () => {
    */
   function extractPilotInformation(lineContent) {
     try {
-      const pilotData = lineContent.match(/(\s)([0-9][0-9][0-9])(\s)([^\w*])(\s)(\w)([^\w*])([^\s]+)/gi)[0].trim();
-      const [pilotId, , , , pilotName] = pilotData.split(/(\s)([^\-*])(\s)/gi);
+      let pilotData = lineContent.match(/(\s)([0-9][0-9][0-9])(\s)([^\w*])(\s)(\w)([^\w*])([^\s]+)/gi)[0].trim();
+      if (!pilotData) {
+        throw new Error('please check the log format');
+      }
+      pilotData = pilotData.split(/(\s)([^\-*])(\s)/gi);
       return {
-        pilotId,
-        pilotName,
+        pilotId: pilotData.length ? pilotData[0] : '',
+        pilotName: pilotData.length ? pilotData[4] : '',
       };
     } catch (error) {
       throw new Error(`error to get pilot data - ${error.message}`);
@@ -54,7 +59,11 @@ module.exports = () => {
    */
   function extractLapNumber(lineContent) {
     try {
-      return lineContent.match(/(\s)([0-9])(\s)/gi)[0].trim();
+      const lapNumber = lineContent.match(/(\s)([0-9])(\s)/gi)[0].trim();
+      if (!lapNumber) {
+        throw new Error('please check the log format');
+      }
+      return lapNumber;
     } catch (error) {
       throw new Error(`error to get lap number - ${error.message}`);
     }
@@ -70,7 +79,11 @@ module.exports = () => {
    */
   function extractLapTime(lineContent) {
     try {
-      return lineContent.match(/(\s)([0-9]):([0-9][0-9]).([0-9].?.?)/gi)[0].trim();
+      const lapTime = lineContent.match(/(\s)([0-9]):([0-9][0-9]).([0-9].?.?)/gi)[0].trim();
+      if (!lapTime) {
+        throw new Error('please check the log format');
+      }
+      return lapTime;
     } catch (error) {
       throw new Error(`error to get lap time - ${error.message}`);
     }
@@ -86,7 +99,11 @@ module.exports = () => {
    */
   function extractVelocity(lineContent) {
     try {
-      return lineContent.match(/(\s)([0-9][0-9]),([0-9].?.?)/gi)[0].trim();
+      const velocity = lineContent.match(/(\s)([0-9][0-9]),([0-9].?.?)/gi)[0].trim();
+      if (!velocity) {
+        throw new Error('please check the log format');
+      }
+      return velocity;
     } catch (error) {
       throw new Error(`error to get average velocity - ${error.message}`);
     }
@@ -94,24 +111,21 @@ module.exports = () => {
 
   /**
    * function that extract the data from log file.
-   * @function extractDataFromLogFile
+   * @function extractDataFromLogBuffer
    * @param  {string} logFilePath - receive the path of the log file.
    * to be extracted (average velocity).
    * @returns {array}
    * return the an array of objects with the data extracted from the log file.
    */
-  function extractDataFromLogFile(logFilePath) {
+  function extractDataFromLogBuffer(logBuffer) {
     try {
-      if (!existsSync(logFilePath)) {
-        throw new Error(`the file ${basename(logFilePath)} does not exist`);
+      if (!logBuffer) {
+        throw new Error('the file buffer cant be null');
       }
 
-      console.info('reading log file');
-
-      const logData = readFileSync(resolve(logFilePath)).toString();
+      const logData = logBuffer.toString();
       const raceData = [];
 
-      console.info('exteacting data from log file');
       logData.split('\n').forEach((line, index) => {
         if (index !== 0) {
           const { pilotId, pilotName } = extractPilotInformation(line);
@@ -139,6 +153,6 @@ module.exports = () => {
     extractLapNumber,
     extractLapTime,
     extractVelocity,
-    extractDataFromLogFile,
+    extractDataFromLogBuffer,
   };
 };

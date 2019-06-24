@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body, 
+html {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    height: 100%;
+    padding: 0;
+    width: 100%;
+}
+
+.video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+}
+
+.main-content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header-container {
+    align-items: center;
+    align-self: flex-start;
+    background: rgba(50, 50, 50, .5);
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    width: 100%;
+}
+
+.header-container__logo {
+    border-radius: 5%;
+    width: 55px;
+}
+
+.header-container__title {
+    color: #fff;
+    margin: 0;
+}
+
+.main-content__form {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    outline: 2px dashed #434343;
+    outline-offset: -10px;
+    margin: auto;
+    min-height: 300px;
+    padding: 25px;
+    text-align: center;
+    width: 70%;
+}
+
+.main-content__form__input {
+    display: none;
+}
+
+.main-content__form__label {
+    color: #434343;
+    display: flex;
+    font-weight: bold;
+    flex-direction: column;
+}
+
+.main-content__form__label__icon {
+    color: #434343;
+    opacity: 0.7; 
+}
+
+.main-content__form__label__content {
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+.hide {
+    display: none;
+}
+
+.main-content__form__submit {
+    background: #FC695A;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem;
+    max-width: 260px;
+    outline: 0;
+    padding: 8px;
+    width: 100%;
+}
+
+.fileHover {
+    background: rgba(255, 255, 255, 1);
+}
+
+.footer-container {
+    align-items: center;
+    background: rgba(50, 50, 50, .5);
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 15px;
+    width: 100%;
+}
+
+.footer-container__author {
+    color: #fff;
+    font-size: .9rem;
+    margin: 0;
+}
+
+.footer-container__author__icon {
+    color: #ff0000;
+}
+
+.footer-container__social-list {
+    align-items: center;
+    display: flex;
+    font-size: 1.7rem;
+    list-style: none;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    width: 75px;
+}
+
+.footer-container__social-list__item__link {
+    color: #fff;
+}
