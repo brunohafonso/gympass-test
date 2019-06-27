@@ -15,17 +15,81 @@
             <img class="header-container__logo"  src="/assets/images/logo-gympass.png" alt="GymPass logo"/>
             <h1 class="header-container__title">GymPass Race Test</h1>
         </header>
-        <form class="main-content__form" action="/race"  method="post" enctype="multipart/form-data">
-            <input class="main-content__form__input"  type="file" name="file">
-            <label class="main-content__form__label" for="fileInput">
-                <i class="fas fa-cloud-download-alt fa-4x main-content__form__label__icon"></i>
-                <span class="main-content__form__label__content">
-                    Drag and Drop a file here
-                </span>
-            </label>
-            <br/>
-            <input class="main-content__form__submit"  type="submit" value="upload">
-        </form>
+            <% if(pilotsData.pilotsData.length) { %>
+                <div class="pilots-data-wrapper scrollbar">
+                    <div class="pilots-data-wrapper__header">
+                        <div class="pilots-data-wrapper__header__title-wrapper">    
+                            <i class="fas fa-flag-checkered pilots-data-wrapper__header__icon"></i>
+                            <div>    
+                                <h1 class="pilots-data-wrapper__header__main-title">
+                                    gympass circuit
+                                </h1>
+                                <h2 class="pilots-data-wrapper__header__secondary-title">
+                                    GENERAL CLASSIFICATION 
+                                    <span class="pilots-data-wrapper__header__secondary-title__bar">/</span> <span class="pilots-data-wrapper__header__secondary-title__year">2019</span> 
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="bestlap-information">
+                            <h3 class="bestlap-information__title">Best Lap</h3>
+                            <table class="bestlap-information__table">
+                                <thead class="pilots-data-wrapper__table__headers">
+                                    <tr>
+                                      <th>Pilot</th>
+                                      <th>Lap Time</th>
+                                    </tr>
+                                </thead>    
+                                <tbody class="pilots-data-wrapper__table__rows-bestlap">
+                                    <tr>
+                                        <td><%= pilotsData.bestLap.pilotId %> - <%= pilotsData.bestLap.pilotName %></td>
+                                        <td><%= pilotsData.bestLap.lapTime %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <table class="pilots-data-wrapper__table">
+                        <thead>
+                            <tr class="pilots-data-wrapper__table__headers">
+                                <th>Pos</th>
+                                <th>Pilot</th>
+                                <th>Test Time</th>
+                                <th>Average Speed</th>
+                                <th>Test Completed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% pilotsData.pilotsData.forEach((pilot, index) => { %>
+                                <tr class="pilots-data-wrapper__table__rows">
+                                  <td><%= index + 1 %></td>
+                                  <td><%= pilot.pilotId %> - <%= pilot.pilotName %></td>
+                                  <td><%= pilot.totalTestTime%></td>
+                                  <td><%= pilot.totalAverageSpeed %></td>
+                                  <% if(pilot.testCompleted) { %>
+                                    <td><i class="fas fa-check-circle pilots-data-wrapper__table__rows__icon-done"></i>
+                                  <% }  else { %>
+                                    <td><i class="fas fa-times-circle pilots-data-wrapper__table__rows__icon-incomplete"></i></td>
+                                  <% } %>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            <% } %>
+            <% if(!pilotsData.pilotsData.length) { %>
+                <form class="main-content__form" action="/race"  method="post" enctype="multipart/form-data">
+                    <input class="main-content__form__input"  type="file" name="file">
+                    <label class="main-content__form__label" for="fileInput">
+                        <i class="fas fa-cloud-download-alt fa-4x main-content__form__label__icon"></i>
+                        <span class="main-content__form__label__content">
+                            Drag and Drop a file here
+                        </span>
+                        <span class="error"><%= pilotsData.pilotsData %><span>
+                    </label>
+                    <br/>
+                    <input class="main-content__form__submit"  type="submit" value="upload">
+                </form>
+            <% } %>
         <footer class="footer-container">
             <p class="footer-container__author">
                 Developed with <i class="far fa-heart footer-container__author__icon"></i> by Bruno Afonso.

@@ -1,5 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
+.scrollbar::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-track:hover {
+    background-color: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color:#babac0;
+    border-radius:16px;
+}
+
+/* set button(top and bottom of the scrollbar) */
+.scrollbar::-webkit-scrollbar-button {display:none}
+
 * {
     box-sizing: border-box;
 }
@@ -50,6 +71,116 @@ html {
 .header-container__title {
     color: #fff;
     margin: 0;
+}
+
+.pilots-data-wrapper {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    min-height: 300px;
+    overflow: auto;
+    padding: 25px;
+    width: 95%;
+}
+
+.pilots-data-wrapper__header {
+    align-items: center;
+    color: #434343;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pilots-data-wrapper__header__title-wrapper {
+    display: flex;
+}
+
+.pilots-data-wrapper__header__icon {
+    font-size: 4rem;
+    margin-right: 15px;
+}
+
+.pilots-data-wrapper__header__main-title,
+.pilots-data-wrapper__header__secondary-title {
+    margin: auto;
+}
+
+.pilots-data-wrapper__header__main-title {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.pilots-data-wrapper__header__secondary-title {
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    margin-top: -12px;
+}
+
+.bestlap-information__table {
+    border-spacing: 0;
+    text-align: left;
+}
+
+.bestlap-information__table__headers th {
+    border-bottom: 1px solid #434343;
+    padding: 10px;
+}
+
+.pilots-data-wrapper__header__secondary-title__bar {
+    color: #FC695A;
+    font-size: 2rem;
+}
+
+.pilots-data-wrapper__header__secondary-title__year {
+    font-size: 2rem;
+}
+
+.bestlap-information {
+   justify-self: flex-end;
+}
+
+.bestlap-information__title {
+    margin: auto;
+}
+
+.pilots-data-wrapper__table {
+    border-spacing: 0;
+}
+
+.pilots-data-wrapper__table__headers th {
+    background: #FC695A;
+    border-bottom: 1px solid #434343;
+    padding: 10px;
+}
+
+.pilots-data-wrapper__table__rows:hover {
+    background: #FC695A;
+}
+
+.pilots-data-wrapper__table__rows-bestlap td {
+    padding: 10px;
+    text-align: center;
+}
+
+.pilots-data-wrapper__table__rows td {
+    border-bottom: 1px solid #434343;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+}
+
+.pilots-data-wrapper__table__rows__icon-done,
+.pilots-data-wrapper__table__rows__icon-incomplete {
+    font-size: 1.2rem;
+}
+
+.pilots-data-wrapper__table__rows__icon-done {
+    color: #28a745;
+}
+
+.pilots-data-wrapper__table__rows__icon-incomplete {
+    color: #dc3545;
 }
 
 .main-content__form {

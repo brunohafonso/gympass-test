@@ -8,12 +8,5 @@ const { getRaceDataFromLogFile, renderHomePage } = require('../controllers/race.
 module.exports = (app) => {
   app.route('/race')
     .get(renderHomePage)
-    .post((req, res) => {
-      upload(req, res, (err) => {
-        if (err) {
-          res.status(400).send('<h2>Please check the file format before upload.</h2>');
-        }
-      });
-      getRaceDataFromLogFile(req, res);
-    });
+    .post(upload, getRaceDataFromLogFile);
 };

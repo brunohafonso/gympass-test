@@ -7,32 +7,38 @@ const submitButton = document.querySelector('.main-content__form__submit');
 let droppedFiles = [];
 
 // inicio funções que acionam o eventos
-events.forEach((event) => {
-  form.addEventListener(event, (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  });
-});
+function initFormEvents() {
+  if (form) {
+    events.forEach((event) => {
+      form.addEventListener(event, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+    });
 
-form.addEventListener('dragover', () => {
-  form.classList.add('fileHover');
-});
+    form.addEventListener('dragover', () => {
+      form.classList.add('fileHover');
+    });
 
-form.addEventListener('dragenter', () => {
-  form.classList.add('fileHover');
-});
+    form.addEventListener('dragenter', () => {
+      form.classList.add('fileHover');
+    });
 
-form.addEventListener('dragleave', () => {
-  form.classList.remove('fileHover');
-});
+    form.addEventListener('dragleave', () => {
+      form.classList.remove('fileHover');
+    });
 
-form.addEventListener('drop', (e) => {
-  form.classList.remove('fileHover');
-  droppedFiles = e.dataTransfer.files;
-  showFiles(droppedFiles);
-});
+    form.addEventListener('drop', (e) => {
+      form.classList.remove('fileHover');
+      droppedFiles = e.dataTransfer.files;
+      showFiles(droppedFiles);
+    });
 
-form.addEventListener('submit', uploadFiles);
+    form.addEventListener('submit', uploadFiles);
+  }
+}
+
+initFormEvents();
 // fim funções que acionam o eventos
 
 
@@ -53,17 +59,26 @@ function uploadFiles(e) {
       formData.append(fileInput.name, droppedFiles[i], droppedFiles[i].name);
     }
 
-    if (!droppedFiles[0].name.split('.').includes('txt') || !droppedFiles[0].name.split('.').includes('log')) {
+    if (!droppedFiles[0].name.split('.').includes('txt') && !droppedFiles[0].name.split('.').includes('log')) {
       droppedFiles = [];
       label.innerText = 'Choose a file or Drag it here';
       return alert('Please choose the file with correct format.');
     }
 
-    changeFormStatus('upload');
+    changeFormStatus();
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if (this.readyState === 4 && this.status) {
-        document.body.innerHTML = xhr.responseText;
+        if (this.status === 200) {
+          document.body.innerHTML = xhr.responseText;
+        } else if (this.status === 400) {
+          label.innerText = 'Choose a file or Drag it here \n please try again';
+          icon.classList.remove('fa-spinner');
+          icon.classList.remove('fa-pulse');
+          icon.classList.add('fa-cloud-download-alt');
+          submitButton.classList.remove('hide');
+          alert(JSON.parse(xhr.responseText).errorMessage);
+        }
       }
     };
 
